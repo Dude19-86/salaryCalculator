@@ -22,13 +22,8 @@ class _MyAppState extends State<MyApp> {
         ),
         body: ListView(
           children: const [
-            // ImageSection(),
-            // TitleSection(),
-            // TapBoxButtonSection(),
-            // TapBoxCTextSection(),
-            // TapBoxA(),
-            // ParentWidget(),
             SalaryCalculator(),
+            // Pop(),
           ],
         ),
       ),

@@ -272,8 +272,7 @@ class _SalaryCalculatorState extends State<SalaryCalculator> {
               onPressed: () {
                 showDialog(
                   context: context,
-                  builder: (context) => SizedBox(
-                    child: AlertDialog(
+                  builder: (context) => AlertDialog(
                       title: const Text(
                         'My Text',
                       ),
@@ -400,7 +399,7 @@ class _SalaryCalculatorState extends State<SalaryCalculator> {
                         ),
                       ],
                     ),
-                  ),
+
                 );
               },
               child: const Text('Settings'),
