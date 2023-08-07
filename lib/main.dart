@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:salary_calculator/salary_calculator.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:salary_calculator/bloc/main/main_bloc.dart';
+import 'package:salary_calculator/bloc/main/main_bloc.dart';
 
+import 'package:salary_calculator/salary_calculator.dart';
 
 void main() => runApp(const MyApp());
 
@@ -14,18 +17,36 @@ class MyApp extends StatefulWidget {
 class _MyAppState extends State<MyApp> {
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      title: 'Flutter layout demo',
-      home: Scaffold(
-        appBar: AppBar(
-          title: const Text('Flutter layot demo'),
+    return MultiBlocProvider(
+      providers: [
+        BlocProvider(
+          create: (BuildContext context) => MainBloc()..add(MainInit()),
         ),
-        body: ListView(
-          children: const [
-            SalaryCalculator(),
-            // Pop(),
-          ],
-        ),
+      ],
+      child: BlocBuilder<MainBloc, MainState>(
+        builder: (context, state) {
+          return MaterialApp(
+            title: 'Flutter layout demo',
+            theme: state.isDarkTheme
+                ? ThemeData(
+                    brightness: Brightness.dark,
+                  )
+                : ThemeData(
+                    brightness: Brightness.light,
+                  ),
+            home: Scaffold(
+              appBar: AppBar(
+                title: const Text('Flutter layot demo'),
+              ),
+              body: ListView(
+                children: const [
+                  SalaryCalculator(),
+                  // Pop(),
+                ],
+              ),
+            ),
+          );
+        },
       ),
     );
   }

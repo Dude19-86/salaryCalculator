@@ -41,6 +41,7 @@ dependencies:
   google_fonts: ^5.1.0
   info_popup: ^3.0.4
   navigator: ^1.1.1
+  shared_preferences: ^2.0.15
 
 dev_dependencies:
   flutter_test:
