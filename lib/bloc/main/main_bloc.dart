@@ -28,7 +28,7 @@ class MainBloc extends Bloc<MainEvent, MainState> {
 
     on<MainUpdateCalculator>((event, emit) async {
       SharedPreferences prefs = await SharedPreferences.getInstance();
-      await prefs.setDouble(Calculator.dayPercentKey, event.calculator.nightPercent);
+      await prefs.setDouble(Calculator.nightPercentKey, event.calculator.nightPercent);
 
       emit(state.copyWith(calculator: event.calculator));
     });

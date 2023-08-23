@@ -4,9 +4,10 @@ part of 'main_bloc.dart';
 abstract class MainEvent {}
 
 class MainInit extends MainEvent {}
+
 @immutable
 class MainUpdateCalculator extends MainEvent {
-  MainUpdateCalculator(this.calculator);
+  MainUpdateCalculator({required this.calculator});
 
   Calculator calculator;
 }

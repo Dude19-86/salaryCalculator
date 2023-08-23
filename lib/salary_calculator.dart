@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:salary_calculator/bloc/main/main_bloc.dart';
+import 'package:salary_calculator/models/calculator.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class SalaryCalculator extends StatefulWidget {
@@ -11,6 +12,8 @@ class SalaryCalculator extends StatefulWidget {
 }
 
 class _SalaryCalculatorState extends State<SalaryCalculator> {
+  var calculator = Calculator();
+
   //#region Variables
   int dayCounter = 0;
   int nightCounter = 0;
@@ -68,6 +71,7 @@ class _SalaryCalculatorState extends State<SalaryCalculator> {
   Future _initPercentDay() async {
     dayPercent = await _getCounter();
   }
+
   static const percentDayKey = 'percentDayKey';
 
   void _percentDay() async {
@@ -92,7 +96,6 @@ class _SalaryCalculatorState extends State<SalaryCalculator> {
       nightPercent = double.parse(myControllerNightPercent.text);
     });
   }
-
 
   void _percentPremium() {
     setState(() {
@@ -363,12 +366,16 @@ class _SalaryCalculatorState extends State<SalaryCalculator> {
                                   ),
                                 ),
                                 TextButton(
-                                  onPressed: _percentNight,
+                                  onPressed: () {
+                                    final opBloc = context.read<MainBloc>();
+                                    opBloc.add(MainUpdateCalculator(calculator: calculator));
+                                  },
                                   child: const Icon(Icons.add,
                                       color: Colors.indigo),
                                 ),
                                 SizedBox(
-                                  child: Text(nightPercent.toString()),
+                                  child:
+                                      Text(calculator.nightPercent.toString()),
                                 ),
                               ],
                             ),
