@@ -1,7 +1,7 @@
-import 'dart:async';
+// import 'dart:async';
 
-import 'package:bloc/bloc.dart';
-import 'package:meta/meta.dart';
+import 'package:flutter/cupertino.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 import 'package:salary_calculator/constants/common_constants.dart';
@@ -26,7 +26,10 @@ class MainBloc extends Bloc<MainEvent, MainState> {
       ));
     });
 
-    on<MainUpdateCalculator>((event, emit) {
+    on<MainUpdateCalculator>((event, emit) async {
+      SharedPreferences prefs = await SharedPreferences.getInstance();
+      await prefs.setDouble(Calculator.dayPercentKey, event.calculator.nightPercent);
+
       emit(state.copyWith(calculator: event.calculator));
     });
 

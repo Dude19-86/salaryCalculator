@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:salary_calculator/bloc/main/main_bloc.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class SalaryCalculator extends StatefulWidget {
   const SalaryCalculator({super.key});
@@ -58,10 +59,32 @@ class _SalaryCalculatorState extends State<SalaryCalculator> {
     });
   }
 
-  void _percentDay() {
+  @override
+  void initState() {
+    _initPercentDay();
+    super.initState();
+  }
+
+  Future _initPercentDay() async {
+    dayPercent = await _getCounter();
+  }
+  static const percentDayKey = 'percentDayKey';
+
+  void _percentDay() async {
     setState(() {
       dayPercent = double.parse(myControllerDayPercent.text);
     });
+    await _setCounter();
+  }
+
+  Future _setCounter() async {
+    var prefs = await SharedPreferences.getInstance();
+    prefs.setDouble(percentDayKey, dayPercent);
+  }
+
+  Future<double> _getCounter() async {
+    var prefs = await SharedPreferences.getInstance();
+    return prefs.getDouble(percentDayKey) ?? 0;
   }
 
   void _percentNight() {
@@ -69,6 +92,7 @@ class _SalaryCalculatorState extends State<SalaryCalculator> {
       nightPercent = double.parse(myControllerNightPercent.text);
     });
   }
+
 
   void _percentPremium() {
     setState(() {

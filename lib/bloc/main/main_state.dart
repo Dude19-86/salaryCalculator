@@ -2,7 +2,7 @@ part of 'main_bloc.dart';
 
 class MainState {
   const MainState({
-    this.calculator = null,
+    this.calculator,
     this.isDarkTheme = false,
   });
 
