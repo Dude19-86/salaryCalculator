@@ -7,7 +7,7 @@ class MainInit extends MainEvent {}
 
 @immutable
 class MainUpdateCalculator extends MainEvent {
-  MainUpdateCalculator({required this.calculator});
+  MainUpdateCalculator(this.calculator);
 
   Calculator calculator;
 }

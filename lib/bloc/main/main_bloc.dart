@@ -13,6 +13,7 @@ part 'main_state.dart';
 
 class MainBloc extends Bloc<MainEvent, MainState> {
   MainBloc() : super(const MainState()) {
+    var calculator = Calculator();
     on<MainInit>((event, emit) async {
       //Тут первая иницилизация
       //Можно сделать получение данных из хранилища, например Hive, или SharedPreferences
@@ -28,9 +29,11 @@ class MainBloc extends Bloc<MainEvent, MainState> {
 
     on<MainUpdateCalculator>((event, emit) async {
       SharedPreferences prefs = await SharedPreferences.getInstance();
-      await prefs.setDouble(Calculator.nightPercentKey, event.calculator.nightPercent);
+      await prefs.setDouble(
+          Calculator.nightPercentKey, event.calculator.nightPercent);
 
       emit(state.copyWith(calculator: event.calculator));
+
     });
 
     on<MainUpdateTheme>((event, emit) async {

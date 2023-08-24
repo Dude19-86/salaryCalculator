@@ -14,51 +14,25 @@ class SalaryCalculator extends StatefulWidget {
 class _SalaryCalculatorState extends State<SalaryCalculator> {
   var calculator = Calculator();
 
-  //#region Variables
-  int dayCounter = 0;
-  int nightCounter = 0;
-  int partCounter = 0;
-  double dayAmount = 0;
-  double nightAmount = 0;
-  double partAmount = 0;
-  double summary = 0;
-  double dayPercent = 50;
-  double nightPercent = 20;
-  double premiumPercent = 12;
-  double partJobPercent = 20;
-
-  //#endregion
-
-  //#region  myControllers
-  final myControllerDay = TextEditingController();
-  final myControllerNight = TextEditingController();
-  final myControllerPart = TextEditingController();
-  final myControllerDayPercent = TextEditingController();
-  final myControllerNightPercent = TextEditingController();
-  final myControllerPremiumPercent = TextEditingController();
-  final myControllerPartJobPercent = TextEditingController();
-
-  //#endregion
-
   //#region Methods
   void _dayAmountCounter() {
     setState(() {
-      dayAmount += double.parse(myControllerDay.text);
-      dayCounter++;
+      calculator.dayAmount += double.parse(calculator.myControllerDay.text);
+      calculator.dayCounter++;
     });
   }
 
   void _nightAmountCounter() {
     setState(() {
-      nightAmount += double.parse(myControllerNight.text);
-      nightCounter++;
+      calculator.nightAmount += double.parse(calculator.myControllerNight.text);
+      calculator.nightCounter++;
     });
   }
 
   void _partAmountCounter() {
     setState(() {
-      partAmount += double.parse(myControllerPart.text);
-      partCounter++;
+      calculator.partAmount += double.parse(calculator.myControllerPart.text);
+      calculator.partCounter++;
     });
   }
 
@@ -69,21 +43,21 @@ class _SalaryCalculatorState extends State<SalaryCalculator> {
   }
 
   Future _initPercentDay() async {
-    dayPercent = await _getCounter();
+    calculator.dayPercent = await _getCounter();
   }
 
   static const percentDayKey = 'percentDayKey';
 
   void _percentDay() async {
     setState(() {
-      dayPercent = double.parse(myControllerDayPercent.text);
+      calculator.dayPercent = double.parse(calculator.myControllerDayPercent.text);
     });
     await _setCounter();
   }
 
   Future _setCounter() async {
     var prefs = await SharedPreferences.getInstance();
-    prefs.setDouble(percentDayKey, dayPercent);
+    prefs.setDouble(percentDayKey, calculator.dayPercent);
   }
 
   Future<double> _getCounter() async {
@@ -93,54 +67,57 @@ class _SalaryCalculatorState extends State<SalaryCalculator> {
 
   void _percentNight() {
     setState(() {
-      nightPercent = double.parse(myControllerNightPercent.text);
+      calculator.nightPercent = double.parse(calculator.myControllerNightPercent.text);
     });
+
+      final opBloc = context.read<MainBloc>();
+      opBloc.add(MainUpdateCalculator(calculator));
   }
 
   void _percentPremium() {
     setState(() {
-      premiumPercent = double.parse(myControllerPremiumPercent.text);
+      calculator.premiumPercent = double.parse(calculator.myControllerPremiumPercent.text);
     });
   }
 
   void _percentPartJob() {
     setState(() {
-      partJobPercent = double.parse(myControllerPartJobPercent.text);
+      calculator.partJobPercent = double.parse(calculator.myControllerPartJobPercent.text);
     });
   }
 
   void _default() {
     setState(() {
-      dayCounter = 0;
-      nightCounter = 0;
-      partCounter = 0;
-      dayAmount = 0;
-      nightAmount = 0;
-      partAmount = 0;
-      summary = 0;
-      dayPercent = 50;
-      nightPercent = 20;
-      premiumPercent = 12;
-      partJobPercent = 20;
-      myControllerDay.text = '';
-      myControllerNight.text = '';
-      myControllerPart.text = '';
-      myControllerDayPercent.text = '';
-      myControllerNightPercent.text = '';
-      myControllerPremiumPercent.text = '';
-      myControllerPartJobPercent.text = '';
+      calculator.dayCounter = 0;
+      calculator.nightCounter = 0;
+      calculator.partCounter = 0;
+      calculator.dayAmount = 0;
+      calculator.nightAmount = 0;
+      calculator.partAmount = 0;
+      calculator.summary = 0;
+      calculator.dayPercent = 50;
+      calculator.nightPercent = 20;
+      calculator.premiumPercent = 12;
+      calculator.partJobPercent = 20;
+      calculator.myControllerDay.text = '';
+      calculator.myControllerNight.text = '';
+      calculator.myControllerPart.text = '';
+      calculator.myControllerDayPercent.text = '';
+      calculator.myControllerNightPercent.text = '';
+      calculator.myControllerPremiumPercent.text = '';
+      calculator.myControllerPartJobPercent.text = '';
     });
   }
 
   void _summaryF() {
     setState(() {
-      summary = ((dayAmount +
-                  (dayAmount * ((dayPercent + premiumPercent) / 100))) +
-              (nightAmount +
-                  (nightAmount *
-                      ((dayPercent + nightPercent + premiumPercent) / 100))) +
-              (partAmount +
-                  (partAmount * ((dayPercent + partJobPercent) / 100))))
+      calculator.summary = ((calculator.dayAmount +
+                  (calculator.dayAmount * ((calculator.dayPercent + calculator.premiumPercent) / 100))) +
+              (calculator.nightAmount +
+                  (calculator.nightAmount *
+                      ((calculator.dayPercent + calculator.nightPercent + calculator.premiumPercent) / 100))) +
+              (calculator.partAmount +
+                  (calculator.partAmount * ((calculator.dayPercent + calculator.partJobPercent) / 100))))
           .roundToDouble();
     });
   }
@@ -172,7 +149,7 @@ class _SalaryCalculatorState extends State<SalaryCalculator> {
                         Row(
                           children: [
                             SizedBox(
-                              child: Text(dayCounter.toString()),
+                              child: Text(calculator.dayCounter.toString()),
                             ),
                             Padding(
                               padding: EdgeInsets.all(10),
@@ -180,7 +157,7 @@ class _SalaryCalculatorState extends State<SalaryCalculator> {
                                 width: 100,
                                 height: 30,
                                 child: TextField(
-                                  controller: myControllerDay,
+                                  controller: calculator.myControllerDay,
                                   obscureText: false,
                                   decoration: const InputDecoration(
                                     border: OutlineInputBorder(),
@@ -195,14 +172,14 @@ class _SalaryCalculatorState extends State<SalaryCalculator> {
                                   const Icon(Icons.add, color: Colors.indigo),
                             ),
                             SizedBox(
-                              child: Text(dayAmount.toString()),
+                              child: Text(calculator.dayAmount.toString()),
                             ),
                           ],
                         ),
                         Row(
                           children: [
                             SizedBox(
-                              child: Text(nightCounter.toString()),
+                              child: Text(calculator.nightCounter.toString()),
                             ),
                             Padding(
                               padding: EdgeInsets.all(10),
@@ -210,7 +187,7 @@ class _SalaryCalculatorState extends State<SalaryCalculator> {
                                 width: 100,
                                 height: 30,
                                 child: TextField(
-                                  controller: myControllerNight,
+                                  controller: calculator.myControllerNight,
                                   // controller: this.controller,
                                   obscureText: false,
                                   decoration: const InputDecoration(
@@ -226,14 +203,14 @@ class _SalaryCalculatorState extends State<SalaryCalculator> {
                                   const Icon(Icons.add, color: Colors.indigo),
                             ),
                             SizedBox(
-                              child: Text(nightAmount.toString()),
+                              child: Text(calculator.nightAmount.toString()),
                             ),
                           ],
                         ),
                         Row(
                           children: [
                             SizedBox(
-                              child: Text(partCounter.toString()),
+                              child: Text(calculator.partCounter.toString()),
                             ),
                             Padding(
                               padding: EdgeInsets.all(10),
@@ -241,7 +218,7 @@ class _SalaryCalculatorState extends State<SalaryCalculator> {
                                 width: 100,
                                 height: 30,
                                 child: TextField(
-                                  controller: myControllerPart,
+                                  controller: calculator.myControllerPart,
                                   obscureText: false,
                                   decoration: const InputDecoration(
                                     border: OutlineInputBorder(),
@@ -256,7 +233,7 @@ class _SalaryCalculatorState extends State<SalaryCalculator> {
                                   const Icon(Icons.add, color: Colors.indigo),
                             ),
                             SizedBox(
-                              child: Text(partAmount.toString()),
+                              child: Text(calculator.partAmount.toString()),
                             ),
                           ],
                         ),
@@ -295,7 +272,7 @@ class _SalaryCalculatorState extends State<SalaryCalculator> {
                           child: SizedBox(
                             child: Row(
                               children: [
-                                Text(('Summary: ${summary.toString()}')),
+                                Text(('Summary: ${calculator.summary.toString()}')),
                                 TextButton(
                                   onPressed: _summaryF,
                                   child: const Icon(Icons.add,
@@ -329,7 +306,7 @@ class _SalaryCalculatorState extends State<SalaryCalculator> {
                                     width: 150,
                                     height: 30,
                                     child: TextField(
-                                      controller: myControllerDayPercent,
+                                      controller: calculator.myControllerDayPercent,
                                       obscureText: false,
                                       decoration: const InputDecoration(
                                         border: OutlineInputBorder(),
@@ -344,7 +321,7 @@ class _SalaryCalculatorState extends State<SalaryCalculator> {
                                       color: Colors.indigo),
                                 ),
                                 SizedBox(
-                                  child: Text(dayPercent.toString()),
+                                  child: Text(calculator.dayPercent.toString()),
                                 ),
                               ],
                             ),
@@ -356,7 +333,7 @@ class _SalaryCalculatorState extends State<SalaryCalculator> {
                                     width: 150,
                                     height: 30,
                                     child: TextField(
-                                      controller: myControllerNightPercent,
+                                      controller: calculator.myControllerNightPercent,
                                       obscureText: false,
                                       decoration: const InputDecoration(
                                         border: OutlineInputBorder(),
@@ -366,10 +343,7 @@ class _SalaryCalculatorState extends State<SalaryCalculator> {
                                   ),
                                 ),
                                 TextButton(
-                                  onPressed: () {
-                                    final opBloc = context.read<MainBloc>();
-                                    opBloc.add(MainUpdateCalculator(calculator: calculator));
-                                  },
+                                   onPressed: _percentNight,
                                   child: const Icon(Icons.add,
                                       color: Colors.indigo),
                                 ),
@@ -387,7 +361,7 @@ class _SalaryCalculatorState extends State<SalaryCalculator> {
                                     width: 150,
                                     height: 30,
                                     child: TextField(
-                                      controller: myControllerPremiumPercent,
+                                      controller: calculator.myControllerPremiumPercent,
                                       obscureText: false,
                                       decoration: const InputDecoration(
                                         border: OutlineInputBorder(),
@@ -402,7 +376,7 @@ class _SalaryCalculatorState extends State<SalaryCalculator> {
                                       color: Colors.indigo),
                                 ),
                                 SizedBox(
-                                  child: Text(premiumPercent.toString()),
+                                  child: Text(calculator.premiumPercent.toString()),
                                 ),
                               ],
                             ),
@@ -414,7 +388,7 @@ class _SalaryCalculatorState extends State<SalaryCalculator> {
                                     width: 150,
                                     height: 30,
                                     child: TextField(
-                                      controller: myControllerPartJobPercent,
+                                      controller: calculator.myControllerPartJobPercent,
                                       obscureText: false,
                                       decoration: const InputDecoration(
                                         border: OutlineInputBorder(),
@@ -429,7 +403,7 @@ class _SalaryCalculatorState extends State<SalaryCalculator> {
                                       color: Colors.indigo),
                                 ),
                                 SizedBox(
-                                  child: Text(partJobPercent.toString()),
+                                  child: Text(calculator.partJobPercent.toString()),
                                 ),
                               ],
                             ),

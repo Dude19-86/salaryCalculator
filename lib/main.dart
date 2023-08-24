@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:salary_calculator/bloc/main/main_bloc.dart';
-import 'package:salary_calculator/bloc/main/main_bloc.dart';
 
 import 'package:salary_calculator/salary_calculator.dart';
 
@@ -41,7 +40,6 @@ class _MyAppState extends State<MyApp> {
               body: ListView(
                 children: const [
                   SalaryCalculator(),
-                  // Pop(),
                 ],
               ),
             ),
