@@ -22,13 +22,22 @@ class Calculator {
   double nightPercent;
   double premiumPercent;
   double partJobPercent;
-  final myControllerDay = TextEditingController();
-  final myControllerNight = TextEditingController();
-  final myControllerPart = TextEditingController();
-  final myControllerDayPercent = TextEditingController();
-  final myControllerNightPercent = TextEditingController();
-  final myControllerPremiumPercent = TextEditingController();
-  final myControllerPartJobPercent = TextEditingController();
+
+  //Это нужно, чтобы перевести в json
+  Map<String, dynamic> toJson() => {
+        "dayPercent": dayPercent,
+        "nightPercent": nightPercent,
+        "premiumPercent": premiumPercent,
+        "partJobPercent": partJobPercent,
+      };
+
+  //Это нужно, чтобы перевести из json в обычный формат
+  Calculator.fromJson(Map<String, dynamic> json)
+      : dayPercent = json["dayPercent"] ?? 0,
+        nightPercent = json['nightPercent'] ?? 0,
+        premiumPercent = json['premiumPercent'] ?? 0,
+        partJobPercent = json['partJobPercent'] ?? 0;
+
   static String dayPercentKey = 'dayPercent';
   static String nightPercentKey = 'nightPercent';
   static String premiumPercentKey = 'premiumPercent';

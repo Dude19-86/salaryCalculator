@@ -37,11 +37,7 @@ class _MyAppState extends State<MyApp> {
               appBar: AppBar(
                 title: const Text('Flutter layot demo'),
               ),
-              body: ListView(
-                children: const [
-                  SalaryCalculator(),
-                ],
-              ),
+              body: const SalaryCalculator(),
             ),
           );
         },
