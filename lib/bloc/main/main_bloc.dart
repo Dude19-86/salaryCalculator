@@ -24,7 +24,8 @@ class MainBloc extends Bloc<MainEvent, MainState> {
           prefs.getBool(CommonConstants.SharedPreferencesIsDarkTheme) ?? false;
 
       //получаем строку
-      String? tmpCalculator = prefs.getString(CommonConstants.SharedPreferencesCalculator);
+      String? tmpCalculator =
+          prefs.getString(CommonConstants.SharedPreferencesCalculator);
       //Проверяем записано ли что-то, если да, то пробуем её расджейсонить
       Calculator calculator = Calculator();
       //try catch потому что может возникнуть исключение при попытке расджейсонить
@@ -34,7 +35,6 @@ class MainBloc extends Bloc<MainEvent, MainState> {
             : calculator;
       } catch (ex) {
         print("ex");
-
       }
 
       emit(state.copyWith(
@@ -46,8 +46,8 @@ class MainBloc extends Bloc<MainEvent, MainState> {
     on<MainUpdateCalculator>((event, emit) async {
       SharedPreferences prefs = await SharedPreferences.getInstance();
       //Записываем наш объект калькулятор в формате json в строку
-      await prefs.setString(
-          CommonConstants.SharedPreferencesCalculator, jsonEncode(event.calculator));
+      await prefs.setString(CommonConstants.SharedPreferencesCalculator,
+          jsonEncode(event.calculator));
       emit(state.copyWith(calculator: event.calculator));
     });
 

@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:salary_calculator/bloc/main/main_bloc.dart';
 import 'package:salary_calculator/models/calculator.dart';
-import 'package:shared_preferences/shared_preferences.dart';
 
 class SalaryCalculator extends StatefulWidget {
   const SalaryCalculator({super.key});
@@ -28,7 +27,7 @@ class _SalaryCalculatorState extends State<SalaryCalculator> {
 
   void _dayAmountCounter() {
     final mBloc = context.read<MainBloc>();
-    mBloc.state.calculator!.nightPercent += double.parse(myControllerDay.text);
+    mBloc.state.calculator!.dayAmount += double.parse(myControllerDay.text);
     mBloc.state.calculator!.dayCounter++;
     mBloc.add(MainUpdateCalculator(mBloc.state.calculator!));
   }
@@ -174,12 +173,12 @@ class _SalaryCalculatorState extends State<SalaryCalculator> {
                                           width: 100,
                                           height: 30,
                                           child: TextField(
-                                            onChanged: (value) {
-                                              //Пример, тут можно записать значение при изменении
-                                              //state.calculator!.dayAmount = double.parse(value);
-                                              //context.read<MainBloc>().add(MainUpdateCalculator(state.calculator!));
-                                            },
-
+                                            // onChanged: (value) {
+                                            //   //Пример, тут можно записать значение при изменении
+                                            //   //state.calculator!.dayAmount = double.parse(value);
+                                            //   //context.read<MainBloc>().add(MainUpdateCalculator(state.calculator!));
+                                            // },
+                                            keyboardType: TextInputType.number,
                                             controller: myControllerDay,
                                             obscureText: false,
                                             decoration: const InputDecoration(
@@ -216,8 +215,8 @@ class _SalaryCalculatorState extends State<SalaryCalculator> {
                                           width: 100,
                                           height: 30,
                                           child: TextField(
+                                            keyboardType: TextInputType.number,
                                             controller: myControllerNight,
-                                            // controller: this.controller,
                                             obscureText: false,
                                             decoration: const InputDecoration(
                                               border: OutlineInputBorder(),
@@ -253,6 +252,7 @@ class _SalaryCalculatorState extends State<SalaryCalculator> {
                                           width: 100,
                                           height: 30,
                                           child: TextField(
+                                            keyboardType: TextInputType.number,
                                             controller: myControllerPart,
                                             obscureText: false,
                                             decoration: const InputDecoration(
@@ -275,36 +275,36 @@ class _SalaryCalculatorState extends State<SalaryCalculator> {
                                       ),
                                     ],
                                   ),
-                                  Row(
-                                    children: [
-                                      const SizedBox(
-                                        child: Text('0'),
-                                      ),
-                                      const Padding(
-                                        padding: EdgeInsets.all(10),
-                                        child: SizedBox(
-                                          width: 100,
-                                          height: 30,
-                                          child: TextField(
-                                            // controller: this.controller,
-                                            obscureText: false,
-                                            decoration: InputDecoration(
-                                              border: OutlineInputBorder(),
-                                              labelText: 'Day Hours',
-                                            ),
-                                          ),
-                                        ),
-                                      ),
-                                      TextButton(
-                                        onPressed: () {},
-                                        child: const Icon(Icons.add,
-                                            color: Colors.indigo),
-                                      ),
-                                      const SizedBox(
-                                        child: Text('Amount'),
-                                      ),
-                                    ],
-                                  ),
+                                  // Row(
+                                  //   children: [
+                                  //     const SizedBox(
+                                  //       child: Text('0'),
+                                  //     ),
+                                  //     const Padding(
+                                  //       padding: EdgeInsets.all(10),
+                                  //       child: SizedBox(
+                                  //         width: 100,
+                                  //         height: 30,
+                                  //         child: TextField(
+                                  //           // controller: this.controller,
+                                  //           obscureText: false,
+                                  //           decoration: InputDecoration(
+                                  //             border: OutlineInputBorder(),
+                                  //             labelText: 'Day Hours',
+                                  //           ),
+                                  //         ),
+                                  //       ),
+                                  //     ),
+                                  //     TextButton(
+                                  //       onPressed: () {},
+                                  //       child: const Icon(Icons.add,
+                                  //           color: Colors.indigo),
+                                  //     ),
+                                  //     const SizedBox(
+                                  //       child: Text('Amount'),
+                                  //     ),
+                                  //   ],
+                                  // ),
                                   Padding(
                                     padding: const EdgeInsets.all(30),
                                     child: SizedBox(
