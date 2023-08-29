@@ -4,7 +4,6 @@ import 'package:salary_calculator/bloc/main/main_bloc.dart';
 import 'package:salary_calculator/models/calculator.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
-import 'bloc/main/main_bloc.dart';
 
 class SalaryCalculator extends StatefulWidget {
   const SalaryCalculator({super.key});
@@ -21,8 +20,6 @@ class _SalaryCalculatorState extends State<SalaryCalculator> {
   final myControllerNightPercent = TextEditingController();
   final myControllerPremiumPercent = TextEditingController();
   final myControllerPartJobPercent = TextEditingController();
-
-  bool _isLoadingFirstData = false;
 
   //#region Methods
 
