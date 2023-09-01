@@ -2,8 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:salary_calculator/bloc/main/main_bloc.dart';
 import 'package:salary_calculator/models/calculator.dart';
+import 'package:salary_calculator/text_field_my.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-
 
 class SalaryCalculator extends StatefulWidget {
   const SalaryCalculator({super.key});
@@ -25,18 +25,8 @@ class _SalaryCalculatorState extends State<SalaryCalculator> {
 
   @override
   void initState() {
-    //final mBloc = context.read<MainBloc>();
     super.initState();
-    //mBloc.state.calculator еще нет
-    //myControllerDay.text = mBloc.state.calculator!.inputDay;
   }
-
-  // void _saveText() {
-  //   // Save the text to the shared preference.
-  //   final mBloc = context.read<MainBloc>();
-  //   mBloc.state.calculator!.inputDay = myControllerDay.text;
-  //   mBloc.add(MainUpdateCalculator(mBloc.state.calculator!));
-  // }
 
   void _dayAmountCounter() {
     final mBloc = context.read<MainBloc>();
@@ -114,8 +104,6 @@ class _SalaryCalculatorState extends State<SalaryCalculator> {
 
   void _summaryF() {
     final mBloc = context.read<MainBloc>();
-
-    //Не буду усложнять, но мы получаем объект класса калькулятор из нашего хранилища блока
     Calculator calculator = mBloc.state.calculator!;
 
     calculator.summary = ((calculator.dayAmount +
@@ -150,6 +138,12 @@ class _SalaryCalculatorState extends State<SalaryCalculator> {
       },
       listener: (context, state) {
         myControllerDay.text = state.calculator!.inputDay;
+        myControllerNight.text = state.calculator!.inputNight;
+        myControllerPart.text = state.calculator!.inputPart;
+        myControllerDayPercent.text = state.calculator!.inputDayPercent;
+        myControllerNightPercent.text = state.calculator!.inputNightPercent;
+        myControllerPremiumPercent.text = state.calculator!.inputPremiumPercent;
+        myControllerPartJobPercent.text = state.calculator!.inputPartJobPercent;
       },
       builder: (context, state) {
         return BlocBuilder<MainBloc, MainState>(
@@ -185,134 +179,169 @@ class _SalaryCalculatorState extends State<SalaryCalculator> {
                                     crossAxisAlignment:
                                         CrossAxisAlignment.start,
                                     children: [
-                                      Row(
-                                        children: [
-                                          SizedBox(
-                                            child: Text(state.calculator == null
-                                                ? ""
-                                                : state.calculator!.dayCounter
-                                                    .toString()),
-                                          ),
-                                          Padding(
-                                            padding: const EdgeInsets.all(10),
-                                            child: SizedBox(
-                                              width: 100,
-                                              height: 30,
-                                              child: TextField(
-                                                onChanged: (value) {
-                                                  //Пример, тут можно записать значение при изменении
-                                                  state.calculator!.inputDay =
-                                                      value;
-                                                  context.read<MainBloc>().add(
-                                                      MainUpdateCalculator(
-                                                          state.calculator!));
-                                                  print(state
-                                                      .calculator!.inputDay);
-                                                  print(value);
-                                                },
-                                                keyboardType:
-                                                    TextInputType.number,
-                                                controller: myControllerDay,
-                                                obscureText: false,
-                                                decoration:
-                                                    const InputDecoration(
-                                                  border: OutlineInputBorder(),
-                                                  labelText: 'Day Hours',
-                                                ),
-                                              ),
-                                            ),
-                                          ),
-                                          TextButton(
-                                            onPressed: _dayAmountCounter,
-                                            child: const Icon(Icons.add,
-                                                color: Colors.indigo),
-                                          ),
-                                          SizedBox(
-                                            child: Text(state.calculator == null
-                                                ? ""
-                                                : state.calculator!.dayAmount
-                                                    .toString()),
-                                          ),
-                                        ],
-                                      ),
-                                      Row(
-                                        children: [
-                                          SizedBox(
-                                            child: Text(state.calculator == null
-                                                ? ""
-                                                : state.calculator!.nightCounter
-                                                    .toString()),
-                                          ),
-                                          Padding(
-                                            padding: const EdgeInsets.all(10),
-                                            child: SizedBox(
-                                              width: 100,
-                                              height: 30,
-                                              child: TextField(
-                                                keyboardType:
-                                                    TextInputType.number,
-                                                controller: myControllerNight,
-                                                obscureText: false,
-                                                decoration:
-                                                    const InputDecoration(
-                                                  border: OutlineInputBorder(),
-                                                  labelText: 'Night Hours',
-                                                ),
-                                              ),
-                                            ),
-                                          ),
-                                          TextButton(
-                                            onPressed: _nightAmountCounter,
-                                            child: const Icon(Icons.add,
-                                                color: Colors.indigo),
-                                          ),
-                                          SizedBox(
-                                            child: Text(state.calculator == null
-                                                ? ""
-                                                : state.calculator!.nightAmount
-                                                    .toString()),
-                                          ),
-                                        ],
-                                      ),
-                                      Row(
-                                        children: [
-                                          SizedBox(
-                                            child: Text(state.calculator == null
-                                                ? ""
-                                                : state.calculator!.partCounter
-                                                    .toString()),
-                                          ),
-                                          Padding(
-                                            padding: const EdgeInsets.all(10),
-                                            child: SizedBox(
-                                              width: 100,
-                                              height: 30,
-                                              child: TextField(
-                                                keyboardType:
-                                                    TextInputType.number,
-                                                controller: myControllerPart,
-                                                obscureText: false,
-                                                decoration:
-                                                    const InputDecoration(
-                                                  border: OutlineInputBorder(),
-                                                  labelText: 'Part Time Job',
-                                                ),
-                                              ),
-                                            ),
-                                          ),
-                                          TextButton(
-                                            onPressed: _partAmountCounter,
-                                            child: const Icon(Icons.add,
-                                                color: Colors.indigo),
-                                          ),
-                                          SizedBox(
-                                            child: Text(state.calculator == null
-                                                ? ""
-                                                : state.calculator!.partAmount
-                                                    .toString()),
-                                          ),
-                                        ],
-                                      ),
+                                      TextFieldMy(
+                                          input: 'inputDay',
+                                          counter: state.calculator!.dayCounter,
+                                          onPressed: _dayAmountCounter,
+                                          controller: myControllerDay,
+                                          amount: state.calculator!.dayAmount,
+                                          labelText: 'Hours Day'),
+                                      TextFieldMy(
+                                          input: 'inputNight',
+                                          counter:
+                                              state.calculator!.nightCounter,
+                                          onPressed: _nightAmountCounter,
+                                          controller: myControllerNight,
+                                          amount: state.calculator!.nightAmount,
+                                          labelText: 'Hours Night'),
+                                      TextFieldMy(
+                                          input: 'inputPart',
+                                          counter:
+                                              state.calculator!.partCounter,
+                                          onPressed: _partAmountCounter,
+                                          controller: myControllerPart,
+                                          amount: state.calculator!.partAmount,
+                                          labelText: 'Hours Part'),
+
+                                      // Row(
+                                      //   children: [
+                                      //     SizedBox(
+                                      //       child: Text(state.calculator == null
+                                      //           ? ""
+                                      //           : state.calculator!.dayCounter
+                                      //           .toString()),
+                                      //     ),
+                                      //     Padding(
+                                      //       padding: const EdgeInsets.all(10),
+                                      //       child: SizedBox(
+                                      //         width: 100,
+                                      //         height: 30,
+                                      //         child: TextField(
+                                      //           onChanged: (value) {
+                                      //             state.calculator!.inputDay =
+                                      //                 value;
+                                      //             context.read<MainBloc>().add(
+                                      //                 MainUpdateCalculator(
+                                      //                     state.calculator!));
+                                      //           },
+                                      //           keyboardType:
+                                      //           TextInputType.number,
+                                      //           controller: myControllerDay,
+                                      //           obscureText: false,
+                                      //           decoration:
+                                      //           const InputDecoration(
+                                      //             border: OutlineInputBorder(),
+                                      //             labelText: 'Day Hours',
+                                      //           ),
+                                      //         ),
+                                      //       ),
+                                      //     ),
+                                      //     TextButton(
+                                      //       onPressed: _dayAmountCounter,
+                                      //       child: const Icon(Icons.add,
+                                      //           color: Colors.indigo),
+                                      //     ),
+                                      //     SizedBox(
+                                      //       child: Text(state.calculator == null
+                                      //           ? ""
+                                      //           : state.calculator!.dayAmount
+                                      //           .toString()),
+                                      //     ),
+                                      //   ],
+                                      // ),
+                                      // Row(
+                                      //   children: [
+                                      //     SizedBox(
+                                      //       child: Text(state.calculator == null
+                                      //           ? ""
+                                      //           : state.calculator!.nightCounter
+                                      //           .toString()),
+                                      //     ),
+                                      //     Padding(
+                                      //       padding: const EdgeInsets.all(10),
+                                      //       child: SizedBox(
+                                      //         width: 100,
+                                      //         height: 30,
+                                      //         child: TextField(
+                                      //           onChanged: (value) {
+                                      //             //Пример, тут можно записать значение при изменении
+                                      //             state.calculator!.inputNight =
+                                      //                 value;
+                                      //             context.read<MainBloc>().add(
+                                      //                 MainUpdateCalculator(
+                                      //                     state.calculator!));
+                                      //           },
+                                      //           keyboardType:
+                                      //           TextInputType.number,
+                                      //           controller: myControllerNight,
+                                      //           obscureText: false,
+                                      //           decoration:
+                                      //           const InputDecoration(
+                                      //             border: OutlineInputBorder(),
+                                      //             labelText: 'Night Hours',
+                                      //           ),
+                                      //         ),
+                                      //       ),
+                                      //     ),
+                                      //     TextButton(
+                                      //       onPressed: _nightAmountCounter,
+                                      //       child: const Icon(Icons.add,
+                                      //           color: Colors.indigo),
+                                      //     ),
+                                      //     SizedBox(
+                                      //       child: Text(state.calculator == null
+                                      //           ? ""
+                                      //           : state.calculator!.nightAmount
+                                      //           .toString()),
+                                      //     ),
+                                      //   ],
+                                      // ),
+                                      // Row(
+                                      //   children: [
+                                      //     SizedBox(
+                                      //       child: Text(state.calculator == null
+                                      //           ? ""
+                                      //           : state.calculator!.partCounter
+                                      //           .toString()),
+                                      //     ),
+                                      //     Padding(
+                                      //       padding: const EdgeInsets.all(10),
+                                      //       child: SizedBox(
+                                      //         width: 100,
+                                      //         height: 30,
+                                      //         child: TextField(
+                                      //           onChanged: (value) {
+                                      //             state.calculator!.inputPart =
+                                      //                 value;
+                                      //             context.read<MainBloc>().add(
+                                      //                 MainUpdateCalculator(
+                                      //                     state.calculator!));
+                                      //           },
+                                      //           keyboardType:
+                                      //           TextInputType.number,
+                                      //           controller: myControllerPart,
+                                      //           obscureText: false,
+                                      //           decoration:
+                                      //           const InputDecoration(
+                                      //             border: OutlineInputBorder(),
+                                      //             labelText: 'Part Time Job',
+                                      //           ),
+                                      //         ),
+                                      //       ),
+                                      //     ),
+                                      //     TextButton(
+                                      //       onPressed: _partAmountCounter,
+                                      //       child: const Icon(Icons.add,
+                                      //           color: Colors.indigo),
+                                      //     ),
+                                      //     SizedBox(
+                                      //       child: Text(state.calculator == null
+                                      //           ? ""
+                                      //           : state.calculator!.partAmount
+                                      //           .toString()),
+                                      //     ),
+                                      //   ],
+                                      // ),
                                       // Row(
                                       //   children: [
                                       //     const SizedBox(
