@@ -92,7 +92,7 @@ class _SalaryCalculatorState extends State<SalaryCalculator> {
     mBloc.state.calculator!.nightPercent = 20;
     mBloc.state.calculator!.premiumPercent = 12;
     mBloc.state.calculator!.partJobPercent = 20;
-    myControllerDay.text = mBloc.state.calculator!.inputDay;
+    myControllerDay.text = '';
     myControllerNight.text = '';
     myControllerPart.text = '';
     myControllerDayPercent.text = '';
@@ -180,198 +180,29 @@ class _SalaryCalculatorState extends State<SalaryCalculator> {
                                         CrossAxisAlignment.start,
                                     children: [
                                       TextFieldMy(
-                                          input: 'inputDay',
-                                          counter: state.calculator!.dayCounter,
-                                          onPressed: _dayAmountCounter,
-                                          controller: myControllerDay,
-                                          amount: state.calculator!.dayAmount,
-                                          labelText: 'Hours Day'),
+                                        input: 'inputDay',
+                                        counter: state.calculator!.dayCounter,
+                                        onPressed: _dayAmountCounter,
+                                        controller: myControllerDay,
+                                        amount: state.calculator!.dayAmount,
+                                        labelText: 'Hours Day',
+                                      ),
                                       TextFieldMy(
-                                          input: 'inputNight',
-                                          counter:
-                                              state.calculator!.nightCounter,
-                                          onPressed: _nightAmountCounter,
-                                          controller: myControllerNight,
-                                          amount: state.calculator!.nightAmount,
-                                          labelText: 'Hours Night'),
+                                        input: 'inputNight',
+                                        counter: state.calculator!.nightCounter,
+                                        onPressed: _nightAmountCounter,
+                                        controller: myControllerNight,
+                                        amount: state.calculator!.nightAmount,
+                                        labelText: 'Hours Night',
+                                      ),
                                       TextFieldMy(
-                                          input: 'inputPart',
-                                          counter:
-                                              state.calculator!.partCounter,
-                                          onPressed: _partAmountCounter,
-                                          controller: myControllerPart,
-                                          amount: state.calculator!.partAmount,
-                                          labelText: 'Hours Part'),
-
-                                      // Row(
-                                      //   children: [
-                                      //     SizedBox(
-                                      //       child: Text(state.calculator == null
-                                      //           ? ""
-                                      //           : state.calculator!.dayCounter
-                                      //           .toString()),
-                                      //     ),
-                                      //     Padding(
-                                      //       padding: const EdgeInsets.all(10),
-                                      //       child: SizedBox(
-                                      //         width: 100,
-                                      //         height: 30,
-                                      //         child: TextField(
-                                      //           onChanged: (value) {
-                                      //             state.calculator!.inputDay =
-                                      //                 value;
-                                      //             context.read<MainBloc>().add(
-                                      //                 MainUpdateCalculator(
-                                      //                     state.calculator!));
-                                      //           },
-                                      //           keyboardType:
-                                      //           TextInputType.number,
-                                      //           controller: myControllerDay,
-                                      //           obscureText: false,
-                                      //           decoration:
-                                      //           const InputDecoration(
-                                      //             border: OutlineInputBorder(),
-                                      //             labelText: 'Day Hours',
-                                      //           ),
-                                      //         ),
-                                      //       ),
-                                      //     ),
-                                      //     TextButton(
-                                      //       onPressed: _dayAmountCounter,
-                                      //       child: const Icon(Icons.add,
-                                      //           color: Colors.indigo),
-                                      //     ),
-                                      //     SizedBox(
-                                      //       child: Text(state.calculator == null
-                                      //           ? ""
-                                      //           : state.calculator!.dayAmount
-                                      //           .toString()),
-                                      //     ),
-                                      //   ],
-                                      // ),
-                                      // Row(
-                                      //   children: [
-                                      //     SizedBox(
-                                      //       child: Text(state.calculator == null
-                                      //           ? ""
-                                      //           : state.calculator!.nightCounter
-                                      //           .toString()),
-                                      //     ),
-                                      //     Padding(
-                                      //       padding: const EdgeInsets.all(10),
-                                      //       child: SizedBox(
-                                      //         width: 100,
-                                      //         height: 30,
-                                      //         child: TextField(
-                                      //           onChanged: (value) {
-                                      //             //Пример, тут можно записать значение при изменении
-                                      //             state.calculator!.inputNight =
-                                      //                 value;
-                                      //             context.read<MainBloc>().add(
-                                      //                 MainUpdateCalculator(
-                                      //                     state.calculator!));
-                                      //           },
-                                      //           keyboardType:
-                                      //           TextInputType.number,
-                                      //           controller: myControllerNight,
-                                      //           obscureText: false,
-                                      //           decoration:
-                                      //           const InputDecoration(
-                                      //             border: OutlineInputBorder(),
-                                      //             labelText: 'Night Hours',
-                                      //           ),
-                                      //         ),
-                                      //       ),
-                                      //     ),
-                                      //     TextButton(
-                                      //       onPressed: _nightAmountCounter,
-                                      //       child: const Icon(Icons.add,
-                                      //           color: Colors.indigo),
-                                      //     ),
-                                      //     SizedBox(
-                                      //       child: Text(state.calculator == null
-                                      //           ? ""
-                                      //           : state.calculator!.nightAmount
-                                      //           .toString()),
-                                      //     ),
-                                      //   ],
-                                      // ),
-                                      // Row(
-                                      //   children: [
-                                      //     SizedBox(
-                                      //       child: Text(state.calculator == null
-                                      //           ? ""
-                                      //           : state.calculator!.partCounter
-                                      //           .toString()),
-                                      //     ),
-                                      //     Padding(
-                                      //       padding: const EdgeInsets.all(10),
-                                      //       child: SizedBox(
-                                      //         width: 100,
-                                      //         height: 30,
-                                      //         child: TextField(
-                                      //           onChanged: (value) {
-                                      //             state.calculator!.inputPart =
-                                      //                 value;
-                                      //             context.read<MainBloc>().add(
-                                      //                 MainUpdateCalculator(
-                                      //                     state.calculator!));
-                                      //           },
-                                      //           keyboardType:
-                                      //           TextInputType.number,
-                                      //           controller: myControllerPart,
-                                      //           obscureText: false,
-                                      //           decoration:
-                                      //           const InputDecoration(
-                                      //             border: OutlineInputBorder(),
-                                      //             labelText: 'Part Time Job',
-                                      //           ),
-                                      //         ),
-                                      //       ),
-                                      //     ),
-                                      //     TextButton(
-                                      //       onPressed: _partAmountCounter,
-                                      //       child: const Icon(Icons.add,
-                                      //           color: Colors.indigo),
-                                      //     ),
-                                      //     SizedBox(
-                                      //       child: Text(state.calculator == null
-                                      //           ? ""
-                                      //           : state.calculator!.partAmount
-                                      //           .toString()),
-                                      //     ),
-                                      //   ],
-                                      // ),
-                                      // Row(
-                                      //   children: [
-                                      //     const SizedBox(
-                                      //       child: Text('0'),
-                                      //     ),
-                                      //     const Padding(
-                                      //       padding: EdgeInsets.all(10),
-                                      //       child: SizedBox(
-                                      //         width: 100,
-                                      //         height: 30,
-                                      //         child: TextField(
-                                      //           // controller: this.controller,
-                                      //           obscureText: false,
-                                      //           decoration: InputDecoration(
-                                      //             border: OutlineInputBorder(),
-                                      //             labelText: 'Day Hours',
-                                      //           ),
-                                      //         ),
-                                      //       ),
-                                      //     ),
-                                      //     TextButton(
-                                      //       onPressed: () {},
-                                      //       child: const Icon(Icons.add,
-                                      //           color: Colors.indigo),
-                                      //     ),
-                                      //     const SizedBox(
-                                      //       child: Text('Amount'),
-                                      //     ),
-                                      //   ],
-                                      // ),
+                                        input: 'inputPart',
+                                        counter: state.calculator!.partCounter,
+                                        onPressed: _partAmountCounter,
+                                        controller: myControllerPart,
+                                        amount: state.calculator!.partAmount,
+                                        labelText: 'Hours Part',
+                                      ),
                                       Padding(
                                         padding: const EdgeInsets.all(30),
                                         child: SizedBox(
@@ -404,169 +235,42 @@ class _SalaryCalculatorState extends State<SalaryCalculator> {
                                       ),
                                       content: Column(
                                         children: [
-                                          Row(
-                                            children: [
-                                              Expanded(
-                                                child: Padding(
-                                                  padding:
-                                                      const EdgeInsets.all(10),
-                                                  child: SizedBox(
-                                                    height: 30,
-                                                    child: TextField(
-                                                      keyboardType:
-                                                          TextInputType.number,
-                                                      controller:
-                                                          myControllerDayPercent,
-                                                      obscureText: false,
-                                                      decoration:
-                                                          const InputDecoration(
-                                                        border:
-                                                            OutlineInputBorder(),
-                                                        labelText:
-                                                            'Day Percent',
-                                                      ),
-                                                    ),
-                                                  ),
-                                                ),
-                                              ),
-                                              TextButton(
-                                                onPressed: _percentDay,
-                                                child: const Icon(Icons.add,
-                                                    color: Colors.indigo),
-                                              ),
-                                              SizedBox(
-                                                child: Text(
-                                                    state.calculator == null
-                                                        ? ""
-                                                        : state.calculator!
-                                                            .dayPercent
-                                                            .toString()),
-                                              ),
-                                            ],
-                                          ),
-                                          Row(
-                                            children: [
-                                              Expanded(
-                                                child: Padding(
-                                                  padding:
-                                                      const EdgeInsets.all(10),
-                                                  child: SizedBox(
-                                                    width: 150,
-                                                    height: 30,
-                                                    child: TextField(
-                                                      keyboardType:
-                                                          TextInputType.number,
-                                                      controller:
-                                                          myControllerNightPercent,
-                                                      obscureText: false,
-                                                      decoration:
-                                                          const InputDecoration(
-                                                        border:
-                                                            OutlineInputBorder(),
-                                                        labelText:
-                                                            'Night Percent',
-                                                      ),
-                                                    ),
-                                                  ),
-                                                ),
-                                              ),
-                                              TextButton(
-                                                onPressed: _percentNight,
-                                                child: const Icon(Icons.add,
-                                                    color: Colors.indigo),
-                                              ),
-                                              SizedBox(
-                                                child: Text(
-                                                    state.calculator == null
-                                                        ? ""
-                                                        : state.calculator!
-                                                            .nightPercent
-                                                            .toString()),
-                                              ),
-                                            ],
-                                          ),
-                                          Row(
-                                            children: [
-                                              Expanded(
-                                                child: Padding(
-                                                  padding:
-                                                      const EdgeInsets.all(10),
-                                                  child: SizedBox(
-                                                    width: 150,
-                                                    height: 30,
-                                                    child: TextField(
-                                                      keyboardType:
-                                                          TextInputType.number,
-                                                      controller:
-                                                          myControllerPremiumPercent,
-                                                      obscureText: false,
-                                                      decoration:
-                                                          const InputDecoration(
-                                                        border:
-                                                            OutlineInputBorder(),
-                                                        labelText:
-                                                            'Premium Percent',
-                                                      ),
-                                                    ),
-                                                  ),
-                                                ),
-                                              ),
-                                              TextButton(
-                                                onPressed: _percentPremium,
-                                                child: const Icon(Icons.add,
-                                                    color: Colors.indigo),
-                                              ),
-                                              SizedBox(
-                                                child: Text(
-                                                    state.calculator == null
-                                                        ? ""
-                                                        : state.calculator!
-                                                            .premiumPercent
-                                                            .toString()),
-                                              ),
-                                            ],
-                                          ),
-                                          Row(
-                                            children: [
-                                              Expanded(
-                                                child: Padding(
-                                                  padding:
-                                                      const EdgeInsets.all(10),
-                                                  child: SizedBox(
-                                                    width: 150,
-                                                    height: 30,
-                                                    child: TextField(
-                                                      keyboardType:
-                                                          TextInputType.number,
-                                                      controller:
-                                                          myControllerPartJobPercent,
-                                                      obscureText: false,
-                                                      decoration:
-                                                          const InputDecoration(
-                                                        border:
-                                                            OutlineInputBorder(),
-                                                        labelText:
-                                                            'Part-Job Percent',
-                                                      ),
-                                                    ),
-                                                  ),
-                                                ),
-                                              ),
-                                              TextButton(
-                                                onPressed: _percentPartJob,
-                                                child: const Icon(Icons.add,
-                                                    color: Colors.indigo),
-                                              ),
-                                              SizedBox(
-                                                child: Text(
-                                                    state.calculator == null
-                                                        ? ""
-                                                        : state.calculator!
-                                                            .partJobPercent
-                                                            .toString()),
-                                              ),
-                                            ],
-                                          ),
+                                          TextFieldMy(
+                                              input: 'inputDayPercent',
+                                              counter: 0,
+                                              onPressed: _percentDay,
+                                              controller:
+                                                  myControllerDayPercent,
+                                              amount:
+                                                  state.calculator!.dayPercent,
+                                              labelText: 'Day Percent'),
+                                          TextFieldMy(
+                                              input: 'inputNightPercent',
+                                              counter: 0,
+                                              onPressed: _percentNight,
+                                              controller:
+                                                  myControllerNightPercent,
+                                              amount: state
+                                                  .calculator!.nightPercent,
+                                              labelText: 'Night Percent'),
+                                          TextFieldMy(
+                                              input: 'inputPremiumPercent',
+                                              counter: 0,
+                                              onPressed: _percentPremium,
+                                              controller:
+                                                  myControllerPremiumPercent,
+                                              amount: state
+                                                  .calculator!.premiumPercent,
+                                              labelText: 'Premium Percent'),
+                                          TextFieldMy(
+                                              input: 'inputPartJobPercent',
+                                              counter: 0,
+                                              onPressed: _percentPartJob,
+                                              controller:
+                                                  myControllerPartJobPercent,
+                                              amount: state
+                                                  .calculator!.partJobPercent,
+                                              labelText: 'Part-Job Percent'),
                                         ],
                                       ),
                                       actions: [

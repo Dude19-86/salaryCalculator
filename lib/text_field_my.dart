@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-
 import 'bloc/main/main_bloc.dart';
 
 class TextFieldMy extends StatelessWidget {
@@ -10,14 +9,24 @@ class TextFieldMy extends StatelessWidget {
   final String labelText;
   final Function() onPressed;
   final TextEditingController controller;
+  // final String countKey;
 
-  const TextFieldMy(
-      {super.key,
-      required this.input,
-      required this.counter,
-      required this.onPressed,
-      required this.controller,
-      required this.amount, required this.labelText});
+  const TextFieldMy({
+    super.key,
+    required this.input,
+    required this.counter,
+    required this.onPressed,
+    required this.controller,
+    required this.amount,
+    required this.labelText,
+    // required this.countKey,
+  });
+
+  // dynamic getProp(String key) {
+  //   return <String, int>{
+  //     "countKey": countKey,
+  //   }[key];
+  // }
 
   @override
   Widget build(BuildContext context) {
@@ -25,7 +34,7 @@ class TextFieldMy extends StatelessWidget {
       return Row(
         children: [
           SizedBox(
-            child: Text(state.calculator == null ? "" : counter.toString()),
+            child: counter == 0 ? null : Text(state.calculator == null ? "" : counter.toString()),
           ),
           Padding(
             padding: const EdgeInsets.all(10),
