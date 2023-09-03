@@ -31,7 +31,6 @@ class _SalaryCalculatorState extends State<SalaryCalculator> {
   void _dayAmountCounter() {
     final mBloc = context.read<MainBloc>();
     mBloc.state.calculator!.dayAmount += double.parse(myControllerDay.text);
-    // myControllerDay.text = mBloc.state.calculator!.inputDay;
     mBloc.state.calculator!.dayCounter++;
     mBloc.add(MainUpdateCalculator(mBloc.state.calculator!));
   }
@@ -184,7 +183,7 @@ class _SalaryCalculatorState extends State<SalaryCalculator> {
                                         counter: state.calculator!.dayCounter,
                                         onPressed: _dayAmountCounter,
                                         controller: myControllerDay,
-                                        amount: state.calculator!.dayAmount,
+                                        amount: state.calculator!.dayAmount.roundToDouble(),
                                         labelText: 'Hours Day',
                                       ),
                                       TextFieldMy(
@@ -192,7 +191,7 @@ class _SalaryCalculatorState extends State<SalaryCalculator> {
                                         counter: state.calculator!.nightCounter,
                                         onPressed: _nightAmountCounter,
                                         controller: myControllerNight,
-                                        amount: state.calculator!.nightAmount,
+                                        amount: state.calculator!.nightAmount.roundToDouble(),
                                         labelText: 'Hours Night',
                                       ),
                                       TextFieldMy(
@@ -200,21 +199,33 @@ class _SalaryCalculatorState extends State<SalaryCalculator> {
                                         counter: state.calculator!.partCounter,
                                         onPressed: _partAmountCounter,
                                         controller: myControllerPart,
-                                        amount: state.calculator!.partAmount,
+                                        amount: state.calculator!.partAmount.roundToDouble(),
                                         labelText: 'Hours Part',
                                       ),
                                       Padding(
                                         padding: const EdgeInsets.all(30),
                                         child: SizedBox(
-                                          child: Row(
+                                          child: Column(
                                             children: [
-                                              Text(
-                                                  ('Summary: ${state.calculator == null ? "" : state.calculator!.summary.toString()}')),
-                                              TextButton(
-                                                onPressed: _summaryF,
-                                                child: const Icon(Icons.add,
-                                                    color: Colors.indigo),
-                                              )
+                                              Row(
+                                                children: [
+                                                  Text(
+                                                      style: const TextStyle(fontSize: 17),
+                                                      ('Summary: ${state.calculator == null ? "" : state.calculator!.summary.toString()}')),
+                                                  TextButton(
+                                                    onPressed: _summaryF,
+                                                    child: const Icon(Icons.add,
+                                                        color: Colors.indigo),
+                                                  )
+                                                ],
+                                              ),
+                                              Row(
+                                                children: [
+                                                  Text(
+                                                    style: const TextStyle(fontSize: 17),
+                                                      ('Less Tax:  ${state.calculator == null ? "" : (state.calculator!.summary * 0.86).toString()}')),
+                                                ],
+                                              ),
                                             ],
                                           ),
                                         ),

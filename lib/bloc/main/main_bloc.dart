@@ -1,16 +1,10 @@
-// import 'dart:async';
-
 import 'dart:convert';
-
 import 'package:flutter/cupertino.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-
 import 'package:salary_calculator/constants/common_constants.dart';
 import 'package:salary_calculator/models/calculator.dart';
-
 part 'main_event.dart';
-
 part 'main_state.dart';
 
 class MainBloc extends Bloc<MainEvent, MainState> {

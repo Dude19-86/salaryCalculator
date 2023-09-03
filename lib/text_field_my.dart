@@ -9,7 +9,6 @@ class TextFieldMy extends StatelessWidget {
   final String labelText;
   final Function() onPressed;
   final TextEditingController controller;
-  // final String countKey;
 
   const TextFieldMy({
     super.key,
@@ -19,14 +18,7 @@ class TextFieldMy extends StatelessWidget {
     required this.controller,
     required this.amount,
     required this.labelText,
-    // required this.countKey,
   });
-
-  // dynamic getProp(String key) {
-  //   return <String, int>{
-  //     "countKey": countKey,
-  //   }[key];
-  // }
 
   @override
   Widget build(BuildContext context) {
@@ -34,7 +26,9 @@ class TextFieldMy extends StatelessWidget {
       return Row(
         children: [
           SizedBox(
-            child: counter == 0 ? null : Text(state.calculator == null ? "" : counter.toString()),
+            child: counter == 0
+                ? null
+                : Text(state.calculator == null ? "" : counter.toString()),
           ),
           Padding(
             padding: const EdgeInsets.all(10),
@@ -66,7 +60,9 @@ class TextFieldMy extends StatelessWidget {
                 controller: controller,
                 obscureText: false,
                 decoration: InputDecoration(
-                  border: const OutlineInputBorder(),
+                  border: OutlineInputBorder(
+                    borderRadius: BorderRadius.circular(10),
+                  ),
                   labelText: labelText,
                 ),
               ),
