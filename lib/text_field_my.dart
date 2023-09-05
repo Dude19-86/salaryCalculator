@@ -33,7 +33,7 @@ class TextFieldMy extends StatelessWidget {
           Padding(
             padding: const EdgeInsets.all(10),
             child: SizedBox(
-              width: 100,
+              width: 120,
               height: 30,
               child: TextField(
                 onChanged: (value) {

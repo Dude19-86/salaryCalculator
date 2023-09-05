@@ -31,7 +31,6 @@ class Calculator {
   String inputPremiumPercent = '';
   String inputPartJobPercent = '';
 
-
   //Это нужно, чтобы перевести в json
   Map<String, dynamic> toJson() => {
         "dayPercent": dayPercent,
@@ -74,9 +73,4 @@ class Calculator {
         inputNightPercent = json["inputNightPercent"] ?? '',
         inputPremiumPercent = json["inputPremiumPercent"] ?? '',
         inputPartJobPercent = json["inputPartJobPercent"] ?? '';
-
-// static String dayPercentKey = 'dayPercent';
-// static String nightPercentKey = 'nightPercent';
-// static String premiumPercentKey = 'premiumPercent';
-// static String partJobPercentKey = 'partJobPercent';
 }

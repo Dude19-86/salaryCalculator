@@ -16,6 +16,8 @@ class MainBloc extends Bloc<MainEvent, MainState> {
 
       bool isDarkTheme =
           prefs.getBool(CommonConstants.SharedPreferencesIsDarkTheme) ?? false;
+      bool isLanguage =
+          prefs.getBool(CommonConstants.SharedPreferencesLanguage) ?? false;
 
       //получаем строку
       String? tmpCalculator =
@@ -34,6 +36,7 @@ class MainBloc extends Bloc<MainEvent, MainState> {
       emit(state.copyWith(
           isLoadingFirstData: false,
           isDarkTheme: isDarkTheme,
+          isLanguage: isLanguage,
           calculator: calculator));
     });
 
@@ -52,6 +55,15 @@ class MainBloc extends Bloc<MainEvent, MainState> {
           CommonConstants.SharedPreferencesIsDarkTheme, event.isDarkTheme);
 
       emit(state.copyWith(isDarkTheme: event.isDarkTheme));
+    });
+
+    on<MainUpdateLanguage>((event, emit) async {
+      SharedPreferences prefs = await SharedPreferences.getInstance();
+
+      await prefs.setBool(
+          CommonConstants.SharedPreferencesLanguage, event.isLanguage);
+
+      emit(state.copyWith(isLanguage: event.isLanguage));
     });
   }
 }

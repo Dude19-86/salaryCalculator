@@ -24,7 +24,7 @@ class _MyAppState extends State<MyApp> {
       child: BlocBuilder<MainBloc, MainState>(
         builder: (context, state) {
           return MaterialApp(
-            title: 'Flutter layout demo',
+            title: 'Salary Calculator',
             theme: state.isDarkTheme
                 ? ThemeData(
                     brightness: Brightness.dark,
@@ -34,7 +34,7 @@ class _MyAppState extends State<MyApp> {
                   ),
             home: Scaffold(
               appBar: AppBar(
-                title: const Text('Flutter layot demo'),
+                title: const Text('Salary Calculator'),
               ),
               body: const SalaryCalculator(),
             ),

@@ -17,3 +17,9 @@ class MainUpdateTheme extends MainEvent {
 
   bool isDarkTheme;
 }
+
+class MainUpdateLanguage extends MainEvent {
+  MainUpdateLanguage({required this.isLanguage});
+
+  bool isLanguage;
+}
