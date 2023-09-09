@@ -1,0 +1,17 @@
+{
+  "english" : "Русский",
+  "lightTheme" : "Светлая Тема",
+  "darkTheme" : "Тёмная Тема",
+  "dayHours" : "Дневные часы",
+  "nightHours" : "Ночные часы",
+  "partHours"   : "Подработки",
+  "myPercent": "Мои проценты",
+  "percentDay" : "Процент Дня",
+  "percentNight" : "Процент Ночи",
+  "percentPremium" : "Процент премии",
+  "partJobPercent" : "Процент Подроботок",
+  "summary" : "Итого",
+  "afterTax" :  "Чистые",
+  "settings" : "Установить проценты",
+  "default1" : "Сброс"
+}

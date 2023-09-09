@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:salary_calculator/bloc/main/main_bloc.dart';
 import 'package:salary_calculator/salary_calculator.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 void main() => runApp(const MyApp());
 
@@ -25,6 +26,8 @@ class _MyAppState extends State<MyApp> {
         builder: (context, state) {
           return MaterialApp(
             title: 'Salary Calculator',
+            localizationsDelegates: AppLocalizations.localizationsDelegates,
+            supportedLocales: AppLocalizations.supportedLocales,
             theme: state.isDarkTheme
                 ? ThemeData(
                     brightness: Brightness.dark,

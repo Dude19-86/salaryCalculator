@@ -3,6 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:salary_calculator/bloc/main/main_bloc.dart';
 import 'package:salary_calculator/models/calculator.dart';
 import 'package:salary_calculator/text_field_my.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class SalaryCalculator extends StatefulWidget {
   const SalaryCalculator({super.key});
@@ -168,8 +169,8 @@ class _SalaryCalculatorState extends State<SalaryCalculator> {
                                     isDarkTheme: !state.isDarkTheme));
                               },
                               child: Text(state.isDarkTheme
-                                  ? state.isLanguage ? 'Dark theme' : 'Темная Тема'
-                                  : state.isLanguage ? 'Light theme' : 'Светлая Тема'),
+                                  ? AppLocalizations.of(context)!.darkTheme
+                                  : AppLocalizations.of(context)!.lightTheme),
                             ),
                             ElevatedButton(
                                 onPressed: () {
@@ -178,7 +179,7 @@ class _SalaryCalculatorState extends State<SalaryCalculator> {
                                       isLanguage: !state.isLanguage));
                                 },
                                 child: Text(
-                                    state.isLanguage ? 'English' : 'Русский')),
+                                    AppLocalizations.of(context)!.english)),
                             Row(
                               children: [
                                 Expanded(
@@ -187,16 +188,15 @@ class _SalaryCalculatorState extends State<SalaryCalculator> {
                                         CrossAxisAlignment.start,
                                     children: [
                                       TextFieldMy(
-                                        input: 'inputDay',
-                                        counter: state.calculator!.dayCounter,
-                                        onPressed: _dayAmountCounter,
-                                        controller: myControllerDay,
-                                        amount: state.calculator!.dayAmount
-                                            .roundToDouble(),
-                                        labelText: state.isLanguage
-                                            ? 'Day Hours'
-                                            : 'Дневные часы',
-                                      ),
+                                          input: 'inputDay',
+                                          counter: state.calculator!.dayCounter,
+                                          onPressed: _dayAmountCounter,
+                                          controller: myControllerDay,
+                                          amount: state.calculator!.dayAmount
+                                              .roundToDouble(),
+                                          labelText:
+                                              AppLocalizations.of(context)!
+                                                  .dayHours),
                                       TextFieldMy(
                                         input: 'inputNight',
                                         counter: state.calculator!.nightCounter,
@@ -204,9 +204,8 @@ class _SalaryCalculatorState extends State<SalaryCalculator> {
                                         controller: myControllerNight,
                                         amount: state.calculator!.nightAmount
                                             .roundToDouble(),
-                                        labelText: state.isLanguage
-                                            ? 'Night Hours'
-                                            : 'Ночные часы',
+                                        labelText: AppLocalizations.of(context)!
+                                            .nightHours,
                                       ),
                                       TextFieldMy(
                                         input: 'inputPart',
@@ -215,9 +214,8 @@ class _SalaryCalculatorState extends State<SalaryCalculator> {
                                         controller: myControllerPart,
                                         amount: state.calculator!.partAmount
                                             .roundToDouble(),
-                                        labelText: state.isLanguage
-                                            ? 'Part Hours'
-                                            : 'Подработки',
+                                        labelText: AppLocalizations.of(context)!
+                                            .partHours,
                                       ),
                                       Padding(
                                         padding: const EdgeInsets.all(30),
@@ -229,7 +227,7 @@ class _SalaryCalculatorState extends State<SalaryCalculator> {
                                                   Text(
                                                       style: const TextStyle(
                                                           fontSize: 17),
-                                                      ('${state.isLanguage ? 'Summary' : 'Итого'}: ${state.calculator == null ? "" : state.calculator!.summary.toString()}')),
+                                                      ('${AppLocalizations.of(context)!.summary}: ${state.calculator == null ? "" : state.calculator!.summary.toString()}')),
                                                   TextButton(
                                                     onPressed: _summaryF,
                                                     child: const Icon(Icons.add,
@@ -242,7 +240,7 @@ class _SalaryCalculatorState extends State<SalaryCalculator> {
                                                   Text(
                                                       style: const TextStyle(
                                                           fontSize: 17),
-                                                      ('${state.isLanguage ? 'After Tax' : 'Чистые'}: ${state.calculator == null ? "" : ((state.calculator!.summary * 0.86).roundToDouble()).toString()}')),
+                                                      ('${AppLocalizations.of(context)!.afterTax}: ${state.calculator == null ? "" : ((state.calculator!.summary * 0.86).roundToDouble()).toString()}')),
                                                 ],
                                               ),
                                             ],
@@ -260,9 +258,8 @@ class _SalaryCalculatorState extends State<SalaryCalculator> {
                                   showDialog(
                                     context: context,
                                     builder: (context) => AlertDialog(
-                                      title: const Text(
-                                        'My Text',
-                                      ),
+                                      title: Text(AppLocalizations.of(context)!
+                                          .myPercent),
                                       content: Column(
                                         children: [
                                           TextFieldMy(
@@ -273,7 +270,9 @@ class _SalaryCalculatorState extends State<SalaryCalculator> {
                                                   myControllerDayPercent,
                                               amount:
                                                   state.calculator!.dayPercent,
-                                              labelText: state.isLanguage ? 'Day Percent' : '% День'),
+                                              labelText:
+                                                  AppLocalizations.of(context)!
+                                                      .percentDay),
                                           TextFieldMy(
                                               input: 'inputNightPercent',
                                               counter: 0,
@@ -282,7 +281,9 @@ class _SalaryCalculatorState extends State<SalaryCalculator> {
                                                   myControllerNightPercent,
                                               amount: state
                                                   .calculator!.nightPercent,
-                                              labelText: state.isLanguage ? 'Night Percent' : '% Ночь'),
+                                              labelText:
+                                                  AppLocalizations.of(context)!
+                                                      .percentNight),
                                           TextFieldMy(
                                               input: 'inputPremiumPercent',
                                               counter: 0,
@@ -291,7 +292,9 @@ class _SalaryCalculatorState extends State<SalaryCalculator> {
                                                   myControllerPremiumPercent,
                                               amount: state
                                                   .calculator!.premiumPercent,
-                                              labelText: state.isLanguage ? 'Premium Percent' : '% Премии'),
+                                              labelText:
+                                                  AppLocalizations.of(context)!
+                                                      .percentPremium),
                                           TextFieldMy(
                                               input: 'inputPartJobPercent',
                                               counter: 0,
@@ -300,7 +303,9 @@ class _SalaryCalculatorState extends State<SalaryCalculator> {
                                                   myControllerPartJobPercent,
                                               amount: state
                                                   .calculator!.partJobPercent,
-                                              labelText: state.isLanguage ? 'Part-Job Percent' : '% Подработок'),
+                                              labelText:
+                                                  AppLocalizations.of(context)!
+                                                      .partJobPercent),
                                         ],
                                       ),
                                       actions: [
@@ -318,15 +323,14 @@ class _SalaryCalculatorState extends State<SalaryCalculator> {
                                     ),
                                   );
                                 },
-                                child: Text(state.isLanguage
-                                    ? 'Settings'
-                                    : 'Настройки'),
+                                child: Text(
+                                    AppLocalizations.of(context)!.settings),
                               ),
                             ),
                             ElevatedButton(
                               onPressed: _default,
                               child:
-                                  Text(state.isLanguage ? 'Default' : 'Сброс'),
+                                  Text(AppLocalizations.of(context)!.default1),
                             ),
                           ],
                         ),

@@ -1,0 +1,17 @@
+{
+  "english" : "English",
+  "lightTheme" : "Light Theme",
+  "darkTheme" : "Dark Theme",
+  "dayHours" : "Day Hours",
+  "nightHours" : "Night Hours",
+  "partHours" : "Part Hours",
+  "myPercent": "My Percent",
+  "percentDay" : "Percent Day",
+  "percentNight" : "Percent Night",
+  "percentPremium" : "Percent Premium",
+  "partJobPercent" : "Part Job Percent",
+  "summary": "Summary",
+  "afterTax": "After Tax",
+  "settings" : "Settings",
+  "default1" : "Default"
+}
